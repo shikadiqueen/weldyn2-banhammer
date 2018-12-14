@@ -261,8 +261,21 @@ class banhammer_listener implements EventSubscriberInterface
 		$bh_reason_user	= $this->request->variable('bh_reason_user', '', true);
 		$ban_time		= $this->request->variable('ban_time', 0);
 
+		// Mandatory ban reason prefix (weldyn2)
+		$bh_prefix = '[BHAMMER: ' . $this->data['username'] . '] ';
+
+		// Generate stock ban reasons if needed (weldyn2)
+		$bh_acc_reason = empty($bh_reason) ? 'Username used for spamming' : $bh_reason;
+		$bh_acc_reason_user = empty($bh_reason_user) ? 'Username used for spamming' : $bh_reason_user;
+
+		$bh_ip_reason = empty($bh_reason) ? 'IP address used for spamming' : $bh_reason;
+		$bh_ip_reason_user = empty($bh_reason_user) ? 'IP address used for spamming' : $bh_reason_user;
+
+		$bh_email_reason = empty($bh_reason) ? 'Email address used for spamming' : $bh_reason;
+		$bh_email_reason_user = empty($bh_reason_user) ? 'Email address used for spamming' : $bh_reason_user;
+
 		// The username is the user so it's always banned.
-		$success = user_ban('user', $this->data['username'], $ban_time, '', false, $bh_reason, $bh_reason_user);
+		$success = user_ban('user', $this->data['username'], $ban_time, '', false, $bh_prefix . $bh_acc_reason, $bh_acc_reason_user);
 
 		if (!$success)
 		{
@@ -271,7 +284,7 @@ class banhammer_listener implements EventSubscriberInterface
 
 		if ($this->request->variable('ban_email', 0))
 		{
-			$success = user_ban('email', $this->data['user_email'], $ban_time, '', false, $bh_reason, $bh_reason_user);
+			$success = user_ban('email', $this->data['user_email'], $ban_time, '', false, $bh_prefix . $bh_email_reason, $bh_email_reason_user);
 
 			if (!$success)
 			{
@@ -281,7 +294,7 @@ class banhammer_listener implements EventSubscriberInterface
 
 		if ($this->request->variable('ban_ip', 0) && !empty($this->data['user_ip']))
 		{
-			$success = user_ban('ip', $this->data['user_ip'], $ban_time, '', false, $bh_reason, $bh_reason_user);
+			$success = user_ban('ip', $this->data['user_ip'], $ban_time, '', false, $bh_prefix . $bh_ip_reason, $bh_ip_reason_user);
 
 			if (!$success)
 			{
