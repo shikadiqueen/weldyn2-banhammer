@@ -294,7 +294,17 @@ class banhammer_listener implements EventSubscriberInterface
 
 		if ($this->request->variable('ban_ip', 0) && !empty($this->data['user_ip']))
 		{
-			$success = user_ban('ip', $this->data['user_ip'], $ban_time, '', false, $bh_prefix . $bh_ip_reason, $bh_ip_reason_user);
+			$ip_ban_time = $ban_time;
+
+			if ($ip_ban_time == 0)
+			{
+				// There's no point in permanent IP bans most of the time, so just ban for 7
+				// days by IP instead. If a permanent IP ban is *really* warranted it can be
+				// applied manually.
+				$ip_ban_time = 10080;
+			}
+
+			$success = user_ban('ip', $this->data['user_ip'], $ip_ban_time, '', false, $bh_prefix . $bh_ip_reason, $bh_ip_reason_user);
 
 			if (!$success)
 			{
