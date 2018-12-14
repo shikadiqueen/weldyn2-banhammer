@@ -25,6 +25,11 @@
             "homepage": "https://phpbbmodders.net",
             "email": "",
             "role": "Past Developer"
+        },
+        {
+            "name": "Iris Morelle",
+            "homepage": "https://shadowm.ai0867.net/",
+            "role": "Wesnoth.org-specific changes"
         }
     ],
     "require": {
