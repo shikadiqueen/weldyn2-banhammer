@@ -111,6 +111,7 @@ class admin_controller
 			'MOVE_GROUP'	=> $this->get_groups($this->request->variable('move_group', $this->config['bh_group_id'])),
 			'SFS_API_KEY'	=> (!empty($this->config['bh_sfs_api_key'])) ? $this->config['bh_sfs_api_key'] : '',
 			'SFS_CURL'		=> (function_exists('curl_init')) ? true : false,
+			'BAN_WESNOTHD_TABLE_NAME' => (!empty($this->config['bh_wesnothd_tblname'])) ? $this->config['bh_wesnothd_tblname'] : '',
 
 			'U_ACTION'		=> $this->u_action,
 		));
@@ -134,6 +135,7 @@ class admin_controller
 		$this->config->set('bh_group_id', $this->request->variable('move_group', 0));
 		$this->config->set('bh_sfs_api_key', $this->request->variable('sfs_api_key', '', true));
 		$this->config->set('bh_ban_time', $this->request->variable('ban_time', 0));
+		$this->config->set('bh_wesnothd_tblname', $this->request->variable('wesnothd_tblname', ''));
 	}
 
 	/**

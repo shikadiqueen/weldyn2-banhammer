@@ -35,6 +35,7 @@ class install_banhammer extends \phpbb\db\migration\migration
 			'del_signature'	=> 0,
 			'group_id'		=> 0,
 			'sfs_api_key'	=> '',
+			'bh_wesnothd_tblname' => '',
 		);
 		$settings = serialize($settings_ary);
 

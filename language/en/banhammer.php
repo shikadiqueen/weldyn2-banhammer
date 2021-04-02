@@ -66,4 +66,6 @@ $lang = array_merge($lang, array(
 	'SURE_BAN'		=> 'Are you sure you want to ban <strong>%s</strong>?', // %s will be a username.
 
 	'THIS_WILL'	=> 'This will',
+
+	'BH_IS_ACTIVE_PLAYER'	=> 'This account belongs to an MP server player',
 ));

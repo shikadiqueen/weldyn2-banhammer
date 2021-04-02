@@ -157,6 +157,25 @@ class banhammer_listener implements EventSubscriberInterface
 			return;
 		}
 
+		$wesnothd_lastvisit = '';
+		$wesnothd_tblname = $this->config['bh_wesnothd_tblname'];
+
+		if(!empty($wesnothd_tblname))
+		{
+			$sql = 'SELECT user_lastvisit FROM ' . $this->db->sql_escape($wesnothd_tblname) . ' ' .
+				   "WHERE username = '" . $this->db->sql_escape(utf8_clean_string($this->data['username'])) . "'";
+			$result = $this->db->sql_query($sql);
+			$wesnothd_lastvisit = (int)$this->db->sql_fetchfield('user_lastvisit');
+			$this->db->sql_freeresult($result);
+		}
+
+		if(!empty($wesnothd_lastvisit))
+		{
+			// Don't allow banhammering MP users
+			$this->template->assign_var('BH_MESSAGE', $this->user->lang['BH_IS_ACTIVE_PLAYER']);
+			return;
+		}
+
 		if ($this->config['bh_group_id'])
 		{
 			// Get group name for banned users, if any.

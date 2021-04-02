@@ -55,4 +55,7 @@ $lang = array_merge($lang, array(
 	'SFS_API_KEY'			=> 'SFS API key',
 	'SFS_API_KEY_EXPLAIN'	=> 'If you want to report spammers automatically to StopForumSpam you need an API key, <a href="http://www.stopforumspam.com/signup">http://www.stopforumspam.com/signup</a>.',
 	'SFS_NEEDS_CURL'		=> '<span style="color:red;">Your server needs cURL installed to use the stop forum spam service.</span>',
+
+	'ACP_BAN_WESNOTHD_TABLE_NAME'			=> 'wesnothd table name',
+	'ACP_BAN_WESNOTHD_TABLE_NAME_EXPLAIN'	=> 'Name of the table in the forum database containing wesnothd-specific information such as the last MP server join times.',
 ));
